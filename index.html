@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Roblox Profile Analyzer</title>
+    <style>
+        body {
+            background: #0f172a;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #e2e8f0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding-top: 80px;
+        }
+        .card {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 12px;
+            width: 550px;
+            text-align: center;
+            box-shadow: 0 0 25px rgba(0,0,0,0.5);
+        }
+        h2 {
+            margin-bottom: 8px;
+            font-size: 22px;
+            color: #f8fafc;
+        }
+        p.subtitle {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #94a3b8;
+        }
+        .form-box {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        input {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px 0 0 8px;
+            border: none;
+            outline: none;
+            background: #334155;
+            color: #f1f5f9;
+        }
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 0 8px 8px 0;
+            background: #0ea5e9;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        button:hover {
+            background: #0284c7;
+        }
+        .error { 
+            color: #f87171; 
+            margin-top: 10px; 
+        }
+        .result {
+            margin-top: 20px;
+            text-align: left;
+            padding: 15px;
+            background: #0f172a;
+            border-radius: 8px;
+        }
+        .avatar {
+            display: block;
+            margin: 10px auto 20px auto;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Roblox Profile Analyzer</h2>
+        <p class="subtitle">Введи username або userId — отримаєш звіт</p>
+        <form method="POST" class="form-box">
+            <input type="text" name="username" placeholder="oleksandr201334">
+            <button type="submit">Analyze</button>
+        </form>
+
+        {% if error %}
+            <p class="error">Error: {{ error }}</p>
+        {% endif %}
+
+        {% if user_info %}
+            <div class="result">
+                {% if user_info.avatar %}
+                    <img class="avatar" src="{{ user_info.avatar }}" alt="Avatar">
+                {% endif %}
+                <p><b>ID:</b> {{ user_info.id }}</p>
+                <p><b>Нік:</b> {{ user_info.name }}</p>
+                <p><b>DisplayName:</b> {{ user_info.displayName }}</p>
+                <p><b>Дата створення:</b> {{ user_info.created }}</p>
+                <p><b>Опис:</b> {{ user_info.description }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
